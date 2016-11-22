@@ -56,11 +56,31 @@ int GetBrightLever()
 	return 0;
 }
 
+#ifdef NDEBUG
+
+int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
+	_In_opt_ HINSTANCE hPrevInstance,
+	_In_ LPTSTR    lpCmdLine,
+	_In_ int       nCmdShow)
+{
+	UNREFERENCED_PARAMETER(hPrevInstance);
+	UNREFERENCED_PARAMETER(lpCmdLine);
+	UNREFERENCED_PARAMETER(nCmdShow);
+
+	SetColorTemper(240, 241, 255);
+
+	return 0;
+}
+
+#else
+
 int _tmain(int argc, _TCHAR* argv[])
 {
-	SetColorTemper(243, 243, 255);
+	//SetColorTemper(245, 243, 255);
 
 	GetBrightLever();
 
 	return 0;
 }
+
+#endif
