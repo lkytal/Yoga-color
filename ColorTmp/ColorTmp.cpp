@@ -16,10 +16,6 @@ int SetColorTemper(int r, int g, int b)
 
 	if (hGammaDC != NULL)
 	{
-		GetDeviceGammaRamp(hGammaDC, (LPVOID)GammaArray);
-
-		WORD lever = GammaArray[0][1];
-
 		for (int i = 0; i < 256; i++)
 		{
 			GammaArray[0][i] = i * r;
@@ -27,7 +23,9 @@ int SetColorTemper(int r, int g, int b)
 			GammaArray[2][i] = i * b;
 		}
 
-		return SetDeviceGammaRamp(hGammaDC, GammaArray);
+		SetDeviceGammaRamp(hGammaDC, GammaArray);
+
+		ReleaseDC(NULL, hGammaDC);
 	}
 
 	return 0;
@@ -51,6 +49,8 @@ int GetBrightLever()
 			printf("G: %d,  ", GammaArray[1][i] / i);
 			printf("B: %d   ", GammaArray[2][i] / i);
 		}
+
+		ReleaseDC(NULL, hGammaDC);
 	}
 
 	return 0;
@@ -76,7 +76,10 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	//SetColorTemper(245, 243, 255);
+	if (argc == 4)
+	{
+		SetColorTemper(_ttoi(argv[1]), _ttoi(argv[2]), _ttoi(argv[3]));
+	}
 
 	GetBrightLever();
 
