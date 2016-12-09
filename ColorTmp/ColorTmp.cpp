@@ -56,7 +56,7 @@ int GetBrightLever()
 	return 0;
 }
 
-#ifdef NDEBUG
+#ifdef _WINDOWAPP
 
 int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
@@ -64,10 +64,20 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	_In_ int       nCmdShow)
 {
 	UNREFERENCED_PARAMETER(hPrevInstance);
-	UNREFERENCED_PARAMETER(lpCmdLine);
 	UNREFERENCED_PARAMETER(nCmdShow);
 
-	SetColorTemper(240, 241, 255);
+	int R = 245, G = 243, B = 255;
+
+	if (lpCmdLine[0] != NULL)
+	{
+		lpCmdLine[3] = lpCmdLine[7] = '\0';
+
+		R = _ttoi(lpCmdLine);
+		G = _ttoi(&lpCmdLine[4]);
+		B = _ttoi(&lpCmdLine[8]);
+	}
+
+	SetColorTemper(R, G, B);
 
 	return 0;
 }
