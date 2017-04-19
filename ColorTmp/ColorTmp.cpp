@@ -66,7 +66,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(nCmdShow);
 
-	int R = 245, G = 243, B = 255;
+	int R = 250, G = 246, B = 255;
 
 	if (lpCmdLine[0] != NULL)
 	{

@@ -1,0 +1,29 @@
+﻿<Window x:Class="Palette.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Palette"
+        mc:Ignorable="d"
+        Title="Color Temper Palette" Height="300" Width="450" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Slider x:Name="R" VerticalAlignment="Center" Grid.Column="1" Margin="10,0"/>
+        <Slider x:Name="G" Grid.Column="1" Margin="10,0" Grid.Row="1" VerticalAlignment="Center"/>
+        <Slider x:Name="B" Grid.Column="1" Margin="10,0" Grid.Row="2" VerticalAlignment="Center"/>
+        <Button Content="Set Color temper" Grid.Column="1" Margin="0,0,15,0" Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,5" ScrollViewer.CanContentScroll="True" Click="Button_Click"/>
+        <Label x:Name="Rlabel" Grid.Column="0" Grid.Row="0" Content="R" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
+        <Label x:Name="Glabel" Grid.Column="0" Grid.Row="1" Content="G" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
+        <Label x:Name="Blabel" Grid.Column="0" Grid.Row="2" Content="B" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
+
+    </Grid>
+</Window>
