@@ -1,31 +1,31 @@
-// ColorTmp.cpp : 定义控制台应用程序的入口点。
-//
-
 #include "stdafx.h"
 #include "windows.h"
 #include "Wingdi.h"
-#include "stdio.h"
+#include "iostream"
+#include <string>
+
+using namespace std;
 
 #pragma comment(lib,"gdi32.lib")
 
 int SetColorTemper(int r, int g, int b)
 {
-	WORD GammaArray[3][256];
+	WORD gammaArray[3][256];
 
-	HDC hGammaDC = GetDC(NULL);
+	const HDC gammaDC = GetDC(NULL);
 
-	if (hGammaDC != NULL)
+	if (gammaDC != NULL)
 	{
 		for (int i = 0; i < 256; i++)
 		{
-			GammaArray[0][i] = i * r;
-			GammaArray[1][i] = i * g;
-			GammaArray[2][i] = i * b;
+			gammaArray[0][i] = i * r;
+			gammaArray[1][i] = i * g;
+			gammaArray[2][i] = i * b;
 		}
 
-		SetDeviceGammaRamp(hGammaDC, GammaArray);
+		SetDeviceGammaRamp(gammaDC, gammaArray);
 
-		ReleaseDC(NULL, hGammaDC);
+		ReleaseDC(NULL, gammaDC);
 	}
 
 	return 0;
@@ -33,24 +33,24 @@ int SetColorTemper(int r, int g, int b)
 
 int GetBrightLever()
 {
-	WORD GammaArray[3][256];
+	WORD gammaArray[3][256];
 
-	HDC hGammaDC = GetDC(NULL);
+	const HDC gammaDC = GetDC(NULL);
 
-	if (hGammaDC != NULL)
+	if (gammaDC != NULL)
 	{
-		GetDeviceGammaRamp(hGammaDC, (LPVOID)GammaArray);
+		GetDeviceGammaRamp(gammaDC, static_cast<LPVOID>(gammaArray));
 
 		for (int i = 1; i < 10; i++)
 		{
-			printf("\nLevel %d    ", i);
+			cout << "\nLevel %d    " << i;
 
-			printf("R: %d,  ", GammaArray[0][i] / i);
-			printf("G: %d,  ", GammaArray[1][i] / i);
-			printf("B: %d   ", GammaArray[2][i] / i);
+			cout << "R: %d,  " << gammaArray[0][i] / i;
+			cout << "G: %d,  " << gammaArray[1][i] / i;
+			cout << "B: %d   " << gammaArray[2][i] / i;
 		}
 
-		ReleaseDC(NULL, hGammaDC);
+		ReleaseDC(NULL, gammaDC);
 	}
 
 	return 0;
@@ -66,15 +66,15 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(nCmdShow);
 
-	int R = 250, G = 246, B = 255;
+	int R = 255, G = 250, B = 253;
 
 	if (lpCmdLine[0] != NULL)
 	{
 		lpCmdLine[3] = lpCmdLine[7] = '\0';
 
-		R = _ttoi(lpCmdLine);
-		G = _ttoi(&lpCmdLine[4]);
-		B = _ttoi(&lpCmdLine[8]);
+		R = stoi(lpCmdLine);
+		G = stoi(&lpCmdLine[4]);
+		B = stoi(&lpCmdLine[8]);
 	}
 
 	SetColorTemper(R, G, B);
